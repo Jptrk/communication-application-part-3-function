@@ -1,0 +1,108 @@
+.main {
+  padding-top: 20px;
+  margin: auto;
+
+  /*----------------------*/
+  /*----Chat container----*/
+  /*----------------------*/
+  /* Toolbar */
+  .chatContainer {
+    .toolbar {
+      height: 30px;
+      width: 100%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      position: relative;
+      border-radius: 5px;
+
+      /* Header */
+      .toolbarLabel {
+        width: auto;
+      }
+
+      /* Close button */
+      .close {
+        border-radius: 5px;
+        height: 30px;
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 0px;
+        cursor: pointer;
+        font-size: 20px;
+        a {
+          display: flex;
+        }
+      }
+    }
+
+    /* Message container */
+    .messageContainer {
+      max-height: 60vh;
+      min-height: 60vh;
+      width: 100%;
+
+      border-right: none;
+      border-left: none;
+
+      padding: 20px 10px;
+      line-height: 1.5;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      .dateTime,
+      .userName {
+        font-weight: bold;
+      }
+      .message {
+        padding: 5px 0;
+        word-wrap: break-word;
+      }
+    }
+
+    /* Chat input container */
+    .chatInputContainer {
+      border-right: none;
+      border-top: none;
+      border-left: none;
+      margin-bottom: 100px;
+      padding: 20px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+
+      .userName {
+        margin-top: 5px;
+        align-self: flex-start;
+        white-space: nowrap;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        margin-bottom: auto;
+        margin-top: 0px;
+      }
+
+      .inputMessage {
+        width: auto;
+        width: 100%;
+      }
+
+      input[type="text"] {
+        padding: 4px 8px;
+        font-size: 16px;
+        width: 100%;
+        resize: vertical;
+        overflow: hidden;
+        min-height: 30px;
+      }
+    }
+  }
+}

@@ -1,0 +1,210 @@
+/* CDN */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+}
+
+/*---------------*/
+/* Design System */
+/*---------------*/
+
+/* Typography */
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+a {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+ul {
+  padding: 0;
+}
+
+/* Buttons */
+button,
+input[type="submit"] {
+  font-size: 16px;
+  padding: 10px 40px;
+  border: solid 2px #18191a;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: white;
+  width: 160px;
+
+  user-select: none;
+}
+
+.button-small {
+  padding: 6px 10px !important;
+  font-size: 12px !important;
+  width: fit-content !important;
+}
+
+/* Input defaults */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+  background-color: white;
+  border: solid 2px #18191a;
+  border-radius: 5px;
+  padding: 10px 10px;
+  width: 240px;
+  font-size: 16px;
+}
+
+/*-----------*/
+/*---Table---*/
+/*-----------*/
+table {
+  width: 100%;
+  min-width: 768px;
+  border: 2px solid black;
+  border-radius: 5px;
+  overflow: hidden;
+
+  tr {
+    th {
+      background-color: #cccccc;
+      font-weight: bold;
+      height: 40px;
+      padding: 0 10px;
+    }
+
+    td {
+      text-align: center;
+      height: 40px;
+      padding: 0 10px;
+    }
+
+    /* Cell borders */
+    td,
+    th {
+      border-right: 2px solid black;
+    }
+
+    /* Row colors */
+    &:nth-child(odd) {
+      background-color: #f0f0f0;
+    }
+  }
+
+  /* Text alignment of first element */
+  tr th:first-child,
+  tr td:first-child {
+    text-align: left;
+  }
+
+  td:last-child,
+  th:last-child {
+    border-right: none;
+  }
+}
+
+/*----------------*/
+/* Custom Classes */
+/*----------------*/
+.rounded-corner {
+  border: 2px solid #18191a;
+  border-radius: 5px;
+}
+
+/* Header */
+.header {
+  margin-bottom: 40px;
+}
+
+/* Custom flex container (Direction: column | centered) */
+.flex-container-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Form custom class */
+.form-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 25px;
+  width: 100%;
+  position: relative;
+}
+
+/*---------------*/
+/* Media Queries */
+/*---------------*/
+@media (max-width: 768px) {
+  /* This will add a scrollbar on the table */
+  .table-wrapper {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .form-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+/*--------*/
+/* Themes */
+/*--------*/
+.darkMode {
+  background-color: #18191a;
+  color: white;
+  transition: 200ms ease;
+
+  .rounded-corner {
+    border: 2px solid white;
+  }
+
+  a {
+    color: white;
+  }
+}
+
+.lightMode {
+  background-color: white;
+  color: #18191a;
+  transition: 200ms ease;
+}

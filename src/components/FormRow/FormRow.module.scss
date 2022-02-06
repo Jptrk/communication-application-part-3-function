@@ -1,0 +1,15 @@
+.formRowContainer {
+  position: relative;
+
+  .formLabel {
+    white-space: nowrap;
+    position: absolute;
+    left: -180px;
+    text-align: right;
+    width: 150px;
+  }
+
+  .error {
+    position: absolute;
+  }
+}

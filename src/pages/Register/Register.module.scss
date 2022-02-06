@@ -1,0 +1,14 @@
+.main {
+  padding-top: 80px;
+  min-height: 100vh;
+  justify-content: flex-start !important;
+
+  .form {
+    gap: 40px;
+
+    .submit {
+      margin: auto;
+      background-color: #69feff;
+    }
+  }
+}

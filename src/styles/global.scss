@@ -12,6 +12,11 @@ body {
   font-size: 16px;
 }
 
+main {
+  max-width: 1440px;
+  margin: auto;
+}
+
 /*---------------*/
 /* Design System */
 /*---------------*/
@@ -200,6 +205,24 @@ table {
 
   a {
     color: white;
+  }
+
+  table {
+    border-color: white;
+
+    tr {
+      th {
+        background-color: white;
+        font-weight: bold;
+        height: 40px;
+        padding: 0 10px;
+        color: #18191a;
+      }
+
+      &:nth-child(odd) {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+    }
   }
 }
 

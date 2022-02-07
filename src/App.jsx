@@ -1,7 +1,7 @@
 // Libraries
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "font-awesome/css/font-awesome.css";
 // Components
 import DarkMode from "./components/theme/DarkMode";
@@ -10,6 +10,8 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Dashboard from "./pages/dashboard/dashboard";
 import Chat from "./pages/Chat/Chat";
+import UserList from "./pages/ManageUsers/userList";
+import EditUser from "./pages/ManageUsers/EditUser";
 // Actions
 import { fetchUserList } from "./features/userList/userListSlice";
 import { fetchUploadList } from "./features/uploadList/uploadListSlice";
@@ -20,7 +22,6 @@ function App() {
   /*-----------------*/
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.controls.darkMode);
-  const location = useLocation();
 
   useEffect(() => {
     // Fetch data from localstorage
@@ -41,6 +42,10 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}>
           {/* Chat */}
           <Route path="chat" element={<Chat />} />
+          {/* User List */}
+          <Route path="manageusers" element={<UserList />} />
+          {/* Edit user */}
+          <Route path="manageusers/:id" element={<EditUser />} />
         </Route>
       </Routes>
       {/* Theme toggle */}

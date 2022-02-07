@@ -1,61 +1,40 @@
 // Libraries
 import styles from "./Register.module.scss";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // Components
 import FormRow from "../../components/FormRow/FormRow";
 import RegisterSuccessful from "./RegisterSuccessful";
-// Utils
-import { errorSetter } from "../../utils/formValidation";
+// Hooks
+import useOnInput from "../../custom/useOnInput";
 
 function Register() {
+  /*-------------------*/
+  /*---- Variables ----*/
+  /*-------------------*/
+  const formInputs = {
+    fullName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
+  const [formData, onInput, errorMessage, valid] = useOnInput(formInputs);
+
   /*----------------*/
   /*---- States ----*/
   /*----------------*/
   const [success, setSuccess] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const [error, setError] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
 
   /*------------------*/
   /*---- Handlers ----*/
   /*------------------*/
   const onInputHandler = (e) => {
-    errorSetter(e, error, formData);
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    onInput(e);
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    setSuccess(true);
+    if (valid) setSuccess(true);
   };
-
-  /*-------------------*/
-  /*---- UseEffect ----*/
-  /*-------------------*/
-  useEffect(() => {
-    // If form field is empty remove error
-    if (!formData.email.length) {
-      setError((prev) => ({ ...prev, email: "" }));
-    }
-    if (!formData.password.length) {
-      setError((prev) => ({ ...prev, password: "" }));
-    }
-    if (!formData.confirmPassword.length) {
-      setError((prev) => ({ ...prev, confirmPassword: "" }));
-    }
-    if (!formData.fullName.length) {
-      setError((prev) => ({ ...prev, fullName: "" }));
-    }
-  }, [formData]);
 
   return (
     <main className={`${styles.main} flex-container-column main`}>
@@ -75,7 +54,7 @@ function Register() {
               placeholder="Full Name"
               handler={onInputHandler}
               value={formData.fullName}
-              error={error.fullName}
+              error={errorMessage.fullName}
             />
 
             {/* Email */}
@@ -86,7 +65,7 @@ function Register() {
               placeholder="Email"
               handler={onInputHandler}
               value={formData.email}
-              error={error.email}
+              error={errorMessage.email}
             />
 
             {/* Password */}
@@ -97,7 +76,7 @@ function Register() {
               placeholder="Password"
               handler={onInputHandler}
               value={formData.password}
-              error={error.password}
+              error={errorMessage.password}
             />
 
             {/* Confirm Password */}
@@ -108,7 +87,7 @@ function Register() {
               placeholder="Confirm Password"
               handler={onInputHandler}
               value={formData.confirmPassword}
-              error={error.confirmPassword}
+              error={errorMessage.confirmPassword}
             />
 
             {/* Submit */}

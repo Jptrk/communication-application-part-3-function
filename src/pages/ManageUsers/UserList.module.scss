@@ -1,0 +1,41 @@
+.main {
+  padding-top: 20px;
+  margin: auto;
+
+  .header {
+    margin: 0 auto 20px auto;
+    padding: 0 0 0 20px;
+    text-align: left;
+    width: 100%;
+  }
+
+  .tableWrapper {
+    max-height: 70vh;
+    width: 100%;
+
+    table {
+      td:nth-of-type(1) {
+        width: 40%;
+      }
+
+      td:nth-of-type(2) {
+        width: 30%;
+      }
+
+      td:nth-of-type(3) {
+        width: 20%;
+      }
+    }
+
+    /* Actions */
+    a {
+      width: initial;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

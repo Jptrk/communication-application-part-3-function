@@ -7,12 +7,12 @@ import Navbar from "../../components/Navbar/Navbar";
 
 function Dashboard() {
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
       {/* Navigation bar */}
       <Navbar />
       {/* Child routes */}
       <Outlet />
-    </main>
+    </div>
   );
 }
 

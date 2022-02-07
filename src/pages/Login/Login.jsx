@@ -1,46 +1,30 @@
 // Libraries
 import styles from "./Login.module.scss";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 // Components
 import FormRow from "../../components/FormRow/FormRow";
-// Utils
-import { errorSetter } from "../../utils/formValidation";
+// Hooks
+import useOnInput from "../../custom/useOnInput";
 
 function Login() {
   const navigate = useNavigate();
-  /*----------------*/
-  /*---- States ----*/
-  /*----------------*/
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [error, setError] = useState({ email: "", password: "" });
+  /*-------------------*/
+  /*---- Variables ----*/
+  /*-------------------*/
+  const formInputs = { email: "", password: "" };
+  const [formData, onInput, errorMessage, valid] = useOnInput(formInputs);
 
   /*------------------*/
   /*---- Handlers ----*/
   /*------------------*/
   const onInputHandler = (e) => {
-    errorSetter(e, error, formData);
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    onInput(e);
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    navigate("/dashboard");
+    if (valid) navigate("/dashboard");
   };
-
-  /*-------------------*/
-  /*---- UseEffect ----*/
-  /*-------------------*/
-  useEffect(() => {
-    // If form field is empty remove error
-    if (!formData.email.length) {
-      setError((prev) => ({ ...prev, email: "" }));
-    }
-    if (!formData.password.length) {
-      setError((prev) => ({ ...prev, password: "" }));
-    }
-  }, [formData]);
 
   return (
     <main className={`${styles.main} flex-container-column main`}>
@@ -60,7 +44,7 @@ function Login() {
           placeholder="Email"
           handler={onInputHandler}
           value={formData.email}
-          error={error.email}
+          error={errorMessage.email}
         />
 
         {/* Password */}
@@ -71,7 +55,7 @@ function Login() {
           placeholder="Password"
           handler={onInputHandler}
           value={formData.password}
-          error={error.password}
+          error={errorMessage.password}
         />
 
         {/* Submit */}

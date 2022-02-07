@@ -1,7 +1,7 @@
 // Libraries
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "font-awesome/css/font-awesome.css";
 // Components
 import DarkMode from "./components/theme/DarkMode";
@@ -20,6 +20,7 @@ function App() {
   /*-----------------*/
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.controls.darkMode);
+  const location = useLocation();
 
   useEffect(() => {
     // Fetch data from localstorage

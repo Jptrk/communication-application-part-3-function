@@ -5,25 +5,14 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from "./Chat.module.scss";
 import { useSelector, useDispatch } from "react-redux";
-// Utils
-import { setActiveNav } from "../../utils/setActiveNav";
 
 function Chat() {
-  const location = useLocation();
-  const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.controls.darkMode);
 
   /*----------------*/
   /*---- states ----*/
   /*----------------*/
   const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    // Set active navigation on mount
-    // Needs two parameters, dispatch
-    // function and pathname from URL
-    setActiveNav(dispatch, location.pathname);
-  }, [dispatch, location.pathname]);
 
   /*------------------*/
   /*---- Handlers ----*/

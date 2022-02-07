@@ -3,7 +3,9 @@
   background-color: #bfbfbf;
   user-select: none;
 
-  a {
+  a,
+  p {
+    cursor: pointer;
     padding: 15px 0;
     width: 100%;
   }
@@ -61,14 +63,16 @@
   }
 
   .active {
-    a {
+    a,
+    p {
       color: #18191a;
     }
   }
 
   .linkItem {
     &:hover {
-      a {
+      a,
+      p {
         color: #18191a;
       }
     }

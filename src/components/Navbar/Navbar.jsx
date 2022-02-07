@@ -1,27 +1,33 @@
 // Libraries
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./Navbar.module.scss";
-// Actions
-import { setActiveState } from "../../features/controls/controlsSlice";
+// Hooks
+import useNavigation from "../../custom/useNavigation";
 
 function Navbar() {
   /*-------------------*/
   /*---- Variables ----*/
   /*-------------------*/
-  const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.controls.darkMode);
   const active = useSelector((state) => state.controls.activeState);
+
+  const location = useLocation();
+  const useActiveNav = useNavigation();
 
   /*------------------*/
   /*---- Handlers ----*/
   /*------------------*/
   const logoutHandler = () => {};
 
-  const onLink = (path) => {
-    dispatch(setActiveState(path));
-  };
+  /*-------------------*/
+  /*---- useEffect ----*/
+  /*-------------------*/
+  useEffect(() => {
+    // Pass a URL path you want to set active to
+    useActiveNav(location.pathname);
+  }, [location.pathname]);
 
   return (
     <nav className={darkMode ? `${styles.darkNav} ${styles.nav}` : styles.nav}>
@@ -31,33 +37,21 @@ function Navbar() {
             active === "chat" ? styles.active : ""
           }`}
         >
-          <Link to="/dashboard/chat" onClick={() => onLink("chat")}>
-            Group Chat
-          </Link>
+          <Link to="/dashboard/chat">Group Chat</Link>
         </li>
         <li
           className={`${styles.linkItem} ${
             active === "manageusers" ? styles.active : ""
           }`}
         >
-          <Link
-            to="/dashboard/manageusers"
-            onClick={() => onLink("manageusers")}
-          >
-            Manage Users
-          </Link>
+          <Link to="/dashboard/manageusers">Manage Users</Link>
         </li>
         <li
           className={`${styles.linkItem} ${
             active === "managedocuments" ? styles.active : ""
           }`}
         >
-          <Link
-            to="/dashboard/managedocuments"
-            onClick={() => onLink("managedocuments")}
-          >
-            Manage Documents
-          </Link>
+          <Link to="/dashboard/managedocuments">Manage Documents</Link>
         </li>
         <li className={`${styles.linkItem} `} onClick={logoutHandler}>
           <Link to="/">Logout</Link>

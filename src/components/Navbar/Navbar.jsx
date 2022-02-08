@@ -1,10 +1,11 @@
 // Libraries
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./Navbar.module.scss";
 // Hooks
 import useNavigation from "../../custom/useNavigation";
+import usePathname from "../../custom/usePathname";
 
 function Navbar() {
   /*-------------------*/
@@ -13,8 +14,10 @@ function Navbar() {
   const darkMode = useSelector((state) => state.controls.darkMode);
   const active = useSelector((state) => state.controls.activeState);
 
-  const location = useLocation();
+  // Update active nav
   const useActiveNav = useNavigation();
+  // Format page path based on index
+  const pageName = usePathname(2);
 
   /*------------------*/
   /*---- Handlers ----*/
@@ -26,8 +29,8 @@ function Navbar() {
   /*-------------------*/
   useEffect(() => {
     // Pass a URL path you want to set active to
-    useActiveNav(location.pathname);
-  }, [location.pathname]);
+    useActiveNav(pageName);
+  }, [pageName]);
 
   return (
     <nav className={darkMode ? `${styles.darkNav} ${styles.nav}` : styles.nav}>

@@ -7,3 +7,7 @@ export function formatPathName(path) {
 
   return pathname;
 }
+
+/*-------------------------------------*/
+/*---- Fetch single data by userID ----*/
+/*-------------------------------------*/

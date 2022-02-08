@@ -12,6 +12,7 @@ import Dashboard from "./pages/dashboard/dashboard";
 import Chat from "./pages/Chat/Chat";
 import UserList from "./pages/ManageUsers/userList";
 import EditUser from "./pages/ManageUsers/EditUser";
+import ManageDocuments from "./pages/ManageDocuments/ManageDocuments";
 // Actions
 import { fetchUserList } from "./features/userList/userListSlice";
 import { fetchUploadList } from "./features/uploadList/uploadListSlice";
@@ -46,6 +47,8 @@ function App() {
           <Route path="manageusers" element={<UserList />} />
           {/* Edit user */}
           <Route path="manageusers/:id" element={<EditUser />} />
+          {/* Manage documents */}
+          <Route path="managedocuments" element={<ManageDocuments />} />
         </Route>
       </Routes>
       {/* Theme toggle */}

@@ -1,0 +1,109 @@
+.editModal {
+  position: fixed;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: block;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 100%;
+  max-width: 500px;
+  color: black;
+
+  /* Toolbar */
+  .toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid black;
+    padding: 2px 2px;
+    width: 100%;
+    height: 36px;
+
+    .toolbarLabel {
+      width: 100%;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .close {
+      cursor: pointer;
+      position: absolute;
+      right: 2px;
+    }
+  }
+
+  /* Form */
+  .editForm {
+    padding: 10px 0 5px 0;
+    min-height: 180px;
+
+    .row1,
+    .row2,
+    .row3 {
+      padding: 10px 10px 20px 30px;
+    }
+
+    .row1 {
+      display: grid;
+      grid-template-columns: 30% auto;
+      align-items: center;
+
+      input[type="text"] {
+        padding: 6px 8px;
+        max-width: 450px;
+        width: 100%;
+      }
+    }
+
+    .row2 {
+      display: grid;
+      grid-template-columns: 30% auto;
+      align-items: center;
+
+      .buttonsContainer {
+        display: flex;
+        gap: 40px;
+
+        button {
+          padding: 6px 8px !important;
+          font-size: 12px !important;
+          background-color: #b3b3b3 !important;
+          width: 100px !important;
+        }
+      }
+    }
+  }
+}
+
+/*---------------*/
+/* Media Queries */
+/*---------------*/
+@media (max-width: 600px) {
+  /* Edit Modal */
+  .editForm {
+    padding: 10px 0 5px 0;
+    min-height: 180px;
+
+    .row1,
+    .row2 {
+      padding: 10px 20px 10px 20px;
+    }
+
+    .row1 {
+      display: flex !important;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .row2 {
+      display: flex !important;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  }
+}

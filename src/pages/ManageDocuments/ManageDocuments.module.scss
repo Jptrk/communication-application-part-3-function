@@ -1,0 +1,64 @@
+.main {
+  padding-top: 20px;
+  margin: auto;
+
+  .header {
+    margin: 0 auto 20px auto;
+    padding: 0 0 0 20px;
+    text-align: left;
+    width: 100%;
+  }
+
+  /* My Uploads */
+  .myUploadContainer {
+    margin-bottom: 40px;
+  }
+
+  /* Shared Uploads */
+  .sharedUploadContainer {
+    margin-bottom: 40px;
+
+    .addUpload {
+      padding: 6px 20px;
+      font-size: 12px;
+      background-color: #66ffff;
+    }
+  }
+
+  /* Table */
+  table {
+    td:nth-of-type(1) {
+      width: 40%;
+    }
+
+    td:nth-of-type(2) {
+      width: 30%;
+    }
+
+    td:nth-of-type(3) {
+      width: 20%;
+    }
+
+    th:nth-of-type(1) {
+      width: 40%;
+    }
+
+    th:nth-of-type(2) {
+      width: 30%;
+    }
+
+    th:nth-of-type(3) {
+      width: 20%;
+    }
+  }
+
+  /* Actions */
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    a {
+      width: initial;
+    }
+  }
+}

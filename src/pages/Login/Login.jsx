@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import FormRow from "../../components/FormRow/FormRow";
 // Hooks
 import useOnInput from "../../custom/useOnInput";
+import { useAuth } from "../../custom/useAuth";
 
 function Login() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ function Login() {
   /*-------------------*/
   const formInputs = { email: "", password: "" };
   const [formData, onInput, errorMessage, valid] = useOnInput(formInputs);
+  const auth = useAuth();
 
   /*------------------*/
   /*---- Handlers ----*/
@@ -23,7 +25,16 @@ function Login() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (valid) navigate("/dashboard");
+    if (valid) {
+      // If success redirect
+      const success = auth.login(formData.email, formData.password);
+      if (success) {
+        navigate("/dashboard/loginsuccessful");
+      } else {
+        alert("Invalid user credentials");
+        return;
+      }
+    }
   };
 
   return (

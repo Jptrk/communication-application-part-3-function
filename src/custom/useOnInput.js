@@ -6,7 +6,6 @@ import { passwordValidation } from "../utils/formValidation";
 
 // Note: this custom hook needs
 // the form input object argument
-// and the error object
 function useOnInput(formInputs) {
   /*----------------*/
   /*---- States ----*/

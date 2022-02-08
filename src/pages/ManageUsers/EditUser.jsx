@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./EditUser.module.scss";
 import { Navigate, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
 // Components
 import FormRow from "../../components/FormRow/FormRow";
 // Hooks
@@ -9,6 +10,8 @@ import useOnInput from "../../custom/useOnInput";
 import usePathname from "../../custom/usePathname";
 import useFetchData from "../../custom/useFetchData";
 import { useSelector } from "react-redux";
+// Actions
+import { editUserAction } from "../../actions/edutUserAction";
 
 function EditUser() {
   /*-------------------*/
@@ -16,6 +19,7 @@ function EditUser() {
   /*-------------------*/
   const location = useLocation();
   const id = usePathname(3);
+  const dispatch = useDispatch();
 
   const formInputs = { fullName: "", email: "" };
   const [formData, onInput, errorMessage, valid] = useOnInput(formInputs);
@@ -24,7 +28,7 @@ function EditUser() {
   /*----------------*/
   /*---- States ----*/
   /*----------------*/
-  const userData = useSelector((state) => state.userList.data);
+  const userList = useSelector((state) => state.userList.data);
   const [found, setFound] = useState(true);
 
   /*------------------*/
@@ -33,7 +37,7 @@ function EditUser() {
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    if (valid) console.log(id);
+    if (valid) dispatch(editUserAction(formData, userList));
   };
 
   const onInputHandler = (e) => {
@@ -45,11 +49,11 @@ function EditUser() {
   /*-------------------*/
   useEffect(() => {
     // Fetch data
-    if (userData && id) {
-      const found = fetchData(id, userData);
+    if (userList && id) {
+      const found = fetchData(id, userList, "id");
       setFound(found);
     }
-  }, [id, userData]);
+  }, [id, userList]);
 
   useEffect(() => {
     if (id && data) {

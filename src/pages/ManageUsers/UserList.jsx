@@ -1,17 +1,24 @@
 // Libraries
 import React, { useState } from "react";
 import styles from "./UserList.module.scss";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // Components
 import User from "./User";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
 // Hooks
 import useVisibility from "../../custom/useVisibility";
+// Actions
+import { deleteUser } from "../../features/userList/userListSlice";
 
 function UserList() {
   /*-------------------*/
   /*---- Variables ----*/
   /*-------------------*/
+  const dispatch = useDispatch();
+
+  /*----------------*/
+  /*---- States ----*/
+  /*----------------*/
   const users = useSelector((state) => state.userList.data);
   const [state, toggle] = useVisibility();
   const [selectedId, setSelectedId] = useState(null);
@@ -25,7 +32,8 @@ function UserList() {
   };
 
   const deleteHandler = () => {
-    console.log(selectedId);
+    dispatch(deleteUser(selectedId));
+    toggle(false);
   };
 
   return (

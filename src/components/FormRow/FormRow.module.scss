@@ -12,4 +12,13 @@
   .error {
     position: absolute;
   }
+
+  @media (max-width: 576px) {
+    .formLabel {
+      position: relative;
+      left: 0;
+      top: 0;
+      text-align: left;
+    }
+  }
 }

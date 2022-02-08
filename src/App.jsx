@@ -13,9 +13,12 @@ import Chat from "./pages/Chat/Chat";
 import UserList from "./pages/ManageUsers/userList";
 import EditUser from "./pages/ManageUsers/EditUser";
 import ManageDocuments from "./pages/ManageDocuments/ManageDocuments";
+import LoginSuccessful from "./pages/LoginSuccessful/LoginSuccessful";
 // Actions
 import { fetchUserList } from "./features/userList/userListSlice";
 import { fetchUploadList } from "./features/uploadList/uploadListSlice";
+// Hooks
+import { RequireAuth, NotRequireAuth } from "./custom/useAuth";
 
 function App() {
   /*-----------------*/
@@ -23,6 +26,7 @@ function App() {
   /*-----------------*/
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.controls.darkMode);
+  const userToken = useSelector((state) => state.userToken.data);
 
   useEffect(() => {
     // Fetch data from localstorage
@@ -34,13 +38,44 @@ function App() {
     <div className={`App ${darkMode ? "darkMode" : "lightMode"}`}>
       <Routes>
         {/* Welcome */}
-        <Route path="/" element={<Welcome />} />
+        <Route
+          path="/"
+          element={
+            <NotRequireAuth>
+              <Welcome />
+            </NotRequireAuth>
+          }
+        />
+
         {/* Login */}
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={
+            <NotRequireAuth>
+              <Login />
+            </NotRequireAuth>
+          }
+        />
+
         {/* Register */}
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/register"
+          element={
+            <NotRequireAuth>
+              <Register />
+            </NotRequireAuth>
+          }
+        />
+
         {/* Dashboard */}
-        <Route path="/dashboard" element={<Dashboard />}>
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        >
           {/* Chat */}
           <Route path="chat" element={<Chat />} />
           {/* User List */}
@@ -49,6 +84,8 @@ function App() {
           <Route path="manageusers/:id" element={<EditUser />} />
           {/* Manage documents */}
           <Route path="managedocuments" element={<ManageDocuments />} />
+          {/* Login successful */}
+          <Route path="loginsuccessful" element={<LoginSuccessful />} />
         </Route>
       </Routes>
       {/* Theme toggle */}

@@ -1,11 +1,16 @@
 // Libraries
 import styles from "./Register.module.scss";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 // Components
 import FormRow from "../../components/FormRow/FormRow";
 import RegisterSuccessful from "./RegisterSuccessful";
 // Hooks
 import useOnInput from "../../custom/useOnInput";
+// Actions
+import { registerAction } from "../../actions/registerAction";
+// Functions
+import { emailExists } from "../../utils/functions";
 
 function Register() {
   /*-------------------*/
@@ -18,11 +23,13 @@ function Register() {
     confirmPassword: "",
   };
   const [formData, onInput, errorMessage, valid] = useOnInput(formInputs);
+  const dispatch = useDispatch();
 
   /*----------------*/
   /*---- States ----*/
   /*----------------*/
   const [success, setSuccess] = useState(false);
+  const userList = useSelector((state) => state.userList.data);
 
   /*------------------*/
   /*---- Handlers ----*/
@@ -33,7 +40,21 @@ function Register() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (valid) setSuccess(true);
+
+    if (valid) {
+      // Validation
+      const { email } = formData;
+      if (emailExists(email, userList)) {
+        alert("Email already exists");
+        return;
+      }
+
+      // Save data
+      dispatch(registerAction(formData, userList));
+
+      // Show successful component
+      setSuccess(true);
+    }
   };
 
   return (

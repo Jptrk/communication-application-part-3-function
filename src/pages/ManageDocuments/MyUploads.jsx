@@ -32,6 +32,8 @@ function MyUploads() {
 
   const deleteUpload = () => {
     console.log("Delete:", selectedUpload);
+
+    showDelete(false);
   };
 
   const showEdit = (show, id) => {
@@ -41,7 +43,7 @@ function MyUploads() {
 
   const editHandler = (e, description) => {
     e.preventDefault();
-    console.log("Edit:", selectedUpload, description);
+    if (description) console.log("Edit:", selectedUpload, description);
   };
 
   return (

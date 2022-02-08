@@ -1,13 +1,9 @@
-/*-------------------------*/
-/*---- Format pathname ----*/
-/*-------------------------*/
-export function formatPathName(path) {
-  const index = path.lastIndexOf("/");
-  const pathname = path.substring(index + 1);
+/*--------------------------*/
+/*---- Form Validations ----*/
+/*--------------------------*/
 
-  return pathname;
-}
-
-/*-------------------------------------*/
-/*---- Fetch single data by userID ----*/
-/*-------------------------------------*/
+// Checks if email already exists
+export const emailExists = (email, userList) => {
+  const exist = userList.some((user) => user.email === email);
+  return exist;
+};

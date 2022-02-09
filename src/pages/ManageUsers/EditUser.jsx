@@ -1,7 +1,7 @@
 // Libraries
 import React, { useEffect, useState } from "react";
 import styles from "./EditUser.module.scss";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 // Components
 import FormRow from "../../components/FormRow/FormRow";
@@ -20,6 +20,7 @@ function EditUser() {
   const location = useLocation();
   const id = usePathname(3);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const formInputs = { fullName: "", email: "" };
   const [formData, onInput, errorMessage, valid] = useOnInput(formInputs);
@@ -36,8 +37,10 @@ function EditUser() {
   /*------------------*/
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
-    if (valid) dispatch(editUserAction(formData, userList));
+    if (valid) {
+      const success = dispatch(editUserAction(formData, data, userList));
+      if (success) navigate(-1);
+    }
   };
 
   const onInputHandler = (e) => {

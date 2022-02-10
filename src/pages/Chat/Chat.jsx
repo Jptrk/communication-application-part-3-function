@@ -2,16 +2,31 @@
 import close from "../../assets/close-button.svg";
 // Libraries
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./Chat.module.scss";
 import { useSelector, useDispatch } from "react-redux";
+// Functions
+import { dateFormat } from "../../utils/functions";
+// Hooks
+import useFetchData from "../../custom/useFetchData";
+// Action creators
+import { fetchChatList } from "../../features/chatList/chatListSlice";
 
 function Chat() {
-  const darkMode = useSelector((state) => state.controls.darkMode);
+  /*-------------------*/
+  /*---- Variables ----*/
+  /*-------------------*/
+  const dispatch = useDispatch();
+  const [data, fetchData, returnFetchedData] = useFetchData();
 
   /*----------------*/
   /*---- states ----*/
   /*----------------*/
+  const darkMode = useSelector((state) => state.controls.darkMode);
+  const userToken = useSelector((state) => state.userToken.data);
+  const chatList = useSelector((state) => state.chatList.data);
+  const userList = useSelector((state) => state.userList.data);
+
   const [message, setMessage] = useState("");
 
   /*------------------*/
@@ -21,8 +36,46 @@ function Chat() {
     setMessage(e.target.value);
   };
 
-  const sendMessageHandler = () => {};
-  const refreshHandler = () => {};
+  const sendMessageHandler = (e) => {
+    e.preventDefault();
+
+    // If message is empty return
+    if (!message.trim()) return;
+
+    //New chat
+    const newChat = [
+      ...chatList,
+      {
+        email: userToken.email,
+        userId: userToken.id,
+        message,
+        id: Number(new Date()),
+        date: new Date(),
+      },
+    ];
+
+    // Save
+    localStorage.setItem("chat", JSON.stringify(newChat));
+
+    // Update state
+    dispatch(fetchChatList());
+    setMessage("");
+  };
+
+  const refreshHandler = () => {
+    // Save
+    localStorage.removeItem("chat");
+
+    // Update state
+    dispatch(fetchChatList());
+  };
+
+  /*-------------------*/
+  /*---- UseEffect ----*/
+  /*-------------------*/
+  useEffect(() => {
+    dispatch(fetchChatList());
+  }, [dispatch]);
 
   return (
     <main className={styles.main}>
@@ -43,37 +96,57 @@ function Chat() {
         {/* Message container */}
         <div className={`${styles.messageContainer} rounded-corner`}>
           {/* Render data */}
+          {chatList.map((chat, key) => (
+            <div className={styles.message} key={key}>
+              <span className={styles.dateTime}>
+                [{dateFormat(chat.date)}]{" "}
+              </span>
+              <span className={styles.userName}>
+                {returnFetchedData(chat.userId, userList, "id")?.fullName ||
+                  "Deleted user"}
+                :{" "}
+              </span>
+
+              <span className={styles.userMessage}>{chat.message}</span>
+            </div>
+          ))}
         </div>
 
         {/* Chat input */}
-        <div className={`${styles.chatInputContainer} rounded-corner`}>
-          <div className={`${styles.userName}`}>
-            <h4>User Name</h4>
+        <form onSubmit={(e) => sendMessageHandler(e)}>
+          <div className={`${styles.chatInputContainer} rounded-corner`}>
+            <div className={`${styles.userName}`}>
+              <h4>
+                {returnFetchedData(userToken.id, userList, "id")?.fullName ||
+                  "Deleted user"}
+              </h4>
+            </div>
+
+            <div className={`${styles.inputMessage}`}>
+              <input
+                type="text"
+                name="message"
+                className={styles.messageInput}
+                onInput={(e) => inputHandler(e)}
+                value={message}
+              />
+            </div>
+            <div className={styles.actions}>
+              <input
+                type="submit"
+                value="Send"
+                className={`button-small ${styles.sendMessage}`}
+                onClick={sendMessageHandler}
+              />
+              <input
+                type="button"
+                value="Refresh"
+                className={`button-small ${styles.sendMessage}`}
+                onClick={refreshHandler}
+              />
+            </div>
           </div>
-          <div className={`${styles.inputMessage}`}>
-            <input
-              type="text"
-              name="message"
-              className={styles.messageInput}
-              onInput={(e) => inputHandler(e)}
-              value={message}
-            />
-          </div>
-          <div className={styles.actions}>
-            <input
-              type="submit"
-              value="Send"
-              className={`button-small ${styles.sendMessage}`}
-              onClick={sendMessageHandler}
-            />
-            <input
-              type="submit"
-              value="Refresh"
-              className={`button-small ${styles.sendMessage}`}
-              onClick={refreshHandler}
-            />
-          </div>
-        </div>
+        </form>
       </div>
     </main>
   );

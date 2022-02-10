@@ -9,13 +9,10 @@ export const chatListSlice = createSlice({
   initialState,
   reducers: {
     fetchChatList: (state) => {
-      state.data = JSON.parse(localStorage.getItem("chats"));
-    },
-    updateChatList: (state) => {
-      state.data = JSON.parse(localStorage.getItem("chats"));
+      state.data = JSON.parse(localStorage.getItem("chat")) || [];
     },
   },
 });
 
-export const { fetchChatList, updateChatList } = chatListSlice.actions;
+export const { fetchChatList } = chatListSlice.actions;
 export default chatListSlice.reducer;

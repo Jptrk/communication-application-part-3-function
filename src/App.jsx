@@ -36,12 +36,12 @@ function App() {
   useEffect(() => {
     // Fetch data from localstorage
     dispatch(fetchUserList());
-  }, [userToken]);
+  }, [userToken, dispatch]);
 
   useEffect(() => {
     // Fetch data from localstorage
     dispatch(fetchUploadList(userToken));
-  }, [userToken]);
+  }, [userToken, dispatch]);
 
   return (
     <div className={`App ${darkMode ? "darkMode" : "lightMode"}`}>

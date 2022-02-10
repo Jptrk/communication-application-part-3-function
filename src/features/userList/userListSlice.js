@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+// import { saveAccountHistoryAction } from "../../utils/functions";
 
 // Init State
 const initialState = {
@@ -14,7 +15,7 @@ export const userListSlice = createSlice({
     /*---- Fetch data ----*/
     /*--------------------*/
     fetchUserList: (state) => {
-      state.data = JSON.parse(localStorage.getItem("accounts"));
+      state.data = JSON.parse(localStorage.getItem("accounts")) || [];
     },
     /*------------------*/
     /*---- Register ----*/
@@ -28,6 +29,10 @@ export const userListSlice = createSlice({
     /*----------------*/
     deleteUser: (state, action) => {
       const userId = parseInt(action.payload);
+
+      // Note: add this if you want to implment
+      // localstorage account history, and account retrieveal.
+      // saveAccountHistoryAction(userId, state.data);
 
       state.data = state.data.filter((user) => user.id !== userId); // Remove user with similar id
       localStorage.setItem("accounts", JSON.stringify(state.data)); // Save to localstorage

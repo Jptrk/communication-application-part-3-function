@@ -93,18 +93,6 @@
             max-height: 250px;
             overflow-y: auto;
 
-            &::-webkit-scrollbar {
-              width: 5px;
-            }
-
-            &::-webkit-scrollbar-track {
-              background: transparent;
-            }
-
-            &::-webkit-scrollbar-thumb {
-              background: #888;
-            }
-
             .option {
               text-align: center;
               padding: 8px 0;

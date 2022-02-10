@@ -31,7 +31,6 @@ function Login() {
       if (success) {
         navigate("/dashboard/loginsuccessful");
       } else {
-        alert("Invalid user credentials");
         return;
       }
     }

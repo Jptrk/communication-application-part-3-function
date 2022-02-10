@@ -5,7 +5,9 @@ import { Navigate, useLocation } from "react-router-dom";
 // Actions
 import { fetchUserToken } from "../features/userToken/userTokenSlice";
 
-// Hook
+/*--------------*/
+/*---- Hook ----*/
+/*--------------*/
 export function useAuth() {
   const userList = useSelector((state) => state.userList.data);
   const dispatch = useDispatch();
@@ -37,8 +39,11 @@ export function useAuth() {
         return true;
       } else {
         // Unauthorize
+        alert("Invalid user credentials");
         return false;
       }
+    } else {
+      alert("Email is not registered");
     }
   };
 
@@ -52,6 +57,9 @@ export function useAuth() {
   return { login, logout };
 }
 
+/*----------------------------*/
+/*---- Logged in redirect ----*/
+/*----------------------------*/
 export const RequireAuth = ({ children }) => {
   const userToken = useSelector((state) => state.userToken.data);
   const location = useLocation();

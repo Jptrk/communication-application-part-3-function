@@ -1,3 +1,9 @@
+/*----------------------------*/
+/*---- Filter Shared User ----*/
+/*----------------------------*/
+
+import { emailExists, idExists } from "./formValidation";
+
 // Note: this will return the list
 // of shared users, and the list
 // of the not shared users
@@ -21,7 +27,9 @@ export const filterSharedUser = (selectedUpload, userList) => {
   return { notSharedUsers, sharedUsers };
 };
 
-// Format date
+/*---------------------*/
+/*---- Format Date ----*/
+/*---------------------*/
 export function dateFormat(date) {
   const newDate = new Date(date);
 
@@ -39,4 +47,36 @@ export function dateFormat(date) {
   }-${newDate.getDate()} ${hour}:${newDate.getMinutes()}:${newDate.getSeconds()} ${ampm}`;
 
   return format;
+}
+
+/*------------------------------*/
+/*---- Save account history ----*/
+/*------------------------------*/
+export function saveAccountHistoryAction(selectedUserId, userData) {
+  // History data
+  const accountHistoryData =
+    JSON.parse(localStorage.getItem("accountHistory")) || [];
+
+  // Selected user
+  const selectedUserData = userData.filter(
+    (account) => account.id === parseInt(selectedUserId)
+  )[0];
+
+  // If email and ID exists dont save
+  const existsEmail = emailExists(selectedUserData.email, accountHistoryData);
+  const existsId = idExists(selectedUserId, accountHistoryData);
+
+  if (existsEmail) return;
+  if (existsId) return;
+
+  accountHistoryData.push(selectedUserData);
+  localStorage.setItem("accountHistory", JSON.stringify(accountHistoryData));
+}
+
+/*---------------------------------------*/
+/*---- Fetch upload info using email ----*/
+/*---------------------------------------*/
+export function fetchDataByEmail(email, arr) {
+  const data = arr.filter((item) => item.email === email);
+  return data[0];
 }

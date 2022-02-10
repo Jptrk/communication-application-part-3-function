@@ -63,3 +63,11 @@ export const emailExists = (email, userList) => {
   const exist = userList.some((user) => user.email === email);
   return exist;
 };
+
+/*-------------------------------------*/
+/*---- Checks of id already exists ----*/
+/*-------------------------------------*/
+export const idExists = (id, arrayData) => {
+  const exist = arrayData.some((account) => account.id === id);
+  return exist;
+};

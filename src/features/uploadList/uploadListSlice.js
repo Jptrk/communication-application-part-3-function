@@ -60,6 +60,29 @@ export const uploadListSlice = createSlice({
       state.data = state.data.filter((upload) => upload.id !== id);
     },
 
+    /*-------------------------------*/
+    /*---- Delete User's Uploads ----*/
+    /*-------------------------------*/
+    deleteUserUploads: (state, action) => {
+      const id = action.payload;
+      const uploadList = JSON.parse(localStorage.getItem("uploads")) || [];
+      const userToken = JSON.parse(localStorage.getItem("userToken")) || [];
+
+      // Filter data based on selected id
+      const updatedData = uploadList.filter((upload) => upload.userId !== id);
+
+      // Save updated data to localstorage
+      localStorage.setItem("uploads", JSON.stringify(updatedData));
+
+      // Filter upload list
+      const filteredUploadList = updatedData.filter(
+        (upload) => upload.userId === userToken.id
+      );
+
+      // Update state
+      state.data = filteredUploadList;
+    },
+
     /*---------------------*/
     /*---- Edit Upload ----*/
     /*---------------------*/
@@ -88,7 +111,7 @@ export const uploadListSlice = createSlice({
     /*---- Fetch Shared Uploads ----*/
     /*------------------------------*/
     fetchSharedUploads: (state, action) => {
-      const uploadList = JSON.parse(localStorage.getItem("uploads"));
+      const uploadList = JSON.parse(localStorage.getItem("uploads")) || [];
       const { id } = action.payload;
 
       const filteredData = uploadList.filter((upload) =>
@@ -152,5 +175,6 @@ export const {
   fetchSharedUploads,
   addSharedUser,
   deleteSharedUser,
+  deleteUserUploads,
 } = uploadListSlice.actions;
 export default uploadListSlice.reducer;

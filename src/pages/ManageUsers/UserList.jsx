@@ -9,6 +9,7 @@ import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import useVisibility from "../../custom/useVisibility";
 // Actions
 import { deleteUser } from "../../features/userList/userListSlice";
+import { deleteUserUploads } from "../../features/uploadList/uploadListSlice";
 
 function UserList() {
   /*-------------------*/
@@ -32,7 +33,12 @@ function UserList() {
   };
 
   const deleteHandler = () => {
+    // Delete User
     dispatch(deleteUser(selectedId));
+
+    // Delete User Uploads
+    dispatch(deleteUserUploads(selectedId));
+
     toggle(false);
   };
 

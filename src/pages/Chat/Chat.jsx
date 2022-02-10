@@ -1,7 +1,7 @@
 // Assets
 import close from "../../assets/close-button.svg";
 // Libraries
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Chat.module.scss";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,6 +18,7 @@ function Chat() {
   /*-------------------*/
   const dispatch = useDispatch();
   const [data, fetchData, returnFetchedData] = useFetchData();
+  const containerRef = useRef(null);
 
   /*----------------*/
   /*---- states ----*/
@@ -74,8 +75,14 @@ function Chat() {
   /*---- UseEffect ----*/
   /*-------------------*/
   useEffect(() => {
+    // Update chat list data
     dispatch(fetchChatList());
   }, [dispatch]);
+
+  useEffect(() => {
+    // Update scroll position on message send
+    containerRef.current.scrollTop = containerRef.current.scrollHeight;
+  }, [chatList]);
 
   return (
     <main className={styles.main}>
@@ -94,7 +101,10 @@ function Chat() {
           </div>
         </div>
         {/* Message container */}
-        <div className={`${styles.messageContainer} rounded-corner`}>
+        <div
+          className={`${styles.messageContainer} rounded-corner`}
+          ref={containerRef}
+        >
           {/* Render data */}
           {chatList.map((chat, key) => (
             <div className={styles.message} key={key}>

@@ -1,0 +1,117 @@
+.main {
+  padding-top: 20px;
+
+  .header {
+    margin: 0 auto 20px auto;
+    padding: 0 0 0 20px;
+    text-align: left;
+    width: 100%;
+  }
+
+  .tableWrapper {
+    overflow-y: auto;
+    max-height: 50vh;
+    table {
+      border: none;
+      td,
+      th {
+        width: 50%;
+      }
+    }
+  }
+
+  .remove {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* Add sharing */
+  .addSharingContainer {
+    margin-top: 40px;
+
+    /* Form */
+    .formRow {
+      width: fit-content !important;
+    }
+
+    /* Choose user */
+    .chooseUserContainer {
+      padding: 30px 60px;
+
+      .chooseUserForm {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+
+        /* Dropdown */
+        .dropdown {
+          cursor: pointer;
+          position: relative;
+          user-select: none;
+
+          /* Dropdown header */
+          .dropdownHeader {
+            padding: 8px;
+            width: 350px;
+            position: relative;
+            z-index: 3;
+            text-align: center;
+
+            .arrowDownContainer {
+              position: absolute;
+              top: 50%;
+              right: 4px;
+              transform: translateY(-50%);
+              height: 30px;
+              width: 30px;
+
+              .arrowDown {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -20%);
+
+                border-top: 10px solid black;
+                border-bottom: 10px solid transparent;
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+              }
+            }
+          }
+          /* Dropdown List */
+          .dropdownList {
+            border-top: 0px !important;
+            border-radius: 0 0 4px 4px !important;
+            padding: 10px;
+            margin-top: 0px;
+            position: absolute;
+            width: 100%;
+            background-color: white;
+            z-index: 2;
+            list-style-type: none;
+
+            max-height: 250px;
+            overflow-y: auto;
+
+            &::-webkit-scrollbar {
+              width: 5px;
+            }
+
+            &::-webkit-scrollbar-track {
+              background: transparent;
+            }
+
+            &::-webkit-scrollbar-thumb {
+              background: #888;
+            }
+
+            .option {
+              text-align: center;
+              padding: 8px 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

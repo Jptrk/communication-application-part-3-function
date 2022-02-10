@@ -13,6 +13,7 @@ import Chat from "./pages/Chat/Chat";
 import UserList from "./pages/ManageUsers/userList";
 import EditUser from "./pages/ManageUsers/EditUser";
 import ManageDocuments from "./pages/ManageDocuments/ManageDocuments";
+import Share from "./pages/Share/Share";
 import LoginSuccessful from "./pages/LoginSuccessful/LoginSuccessful";
 // Actions
 import { fetchUserList } from "./features/userList/userListSlice";
@@ -25,14 +26,22 @@ function App() {
   /*--- Variables ---*/
   /*-----------------*/
   const dispatch = useDispatch();
+
+  /*----------------*/
+  /*---- States ----*/
+  /*----------------*/
   const darkMode = useSelector((state) => state.controls.darkMode);
   const userToken = useSelector((state) => state.userToken.data);
 
   useEffect(() => {
     // Fetch data from localstorage
     dispatch(fetchUserList());
-    dispatch(fetchUploadList());
-  }, []);
+  }, [userToken]);
+
+  useEffect(() => {
+    // Fetch data from localstorage
+    dispatch(fetchUploadList(userToken));
+  }, [userToken]);
 
   return (
     <div className={`App ${darkMode ? "darkMode" : "lightMode"}`}>
@@ -84,6 +93,8 @@ function App() {
           <Route path="manageusers/:id" element={<EditUser />} />
           {/* Manage documents */}
           <Route path="managedocuments" element={<ManageDocuments />} />
+          {/* Share */}
+          <Route path="managedocuments/:id" element={<Share />} />
           {/* Login successful */}
           <Route path="loginsuccessful" element={<LoginSuccessful />} />
         </Route>

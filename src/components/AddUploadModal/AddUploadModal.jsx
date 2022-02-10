@@ -1,19 +1,37 @@
 // Libraries
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./AddUploadModal.module.scss";
 // Hooks
 import useOnInput from "../../custom/useOnInput";
+import useFilePath from "../../custom/useFilePath";
 // Assets
 import close from "../../assets/close-button.svg";
 
 function AddUploadModal({ showUploadHandler, uploadHandler }) {
+  /*-------------------*/
+  /*---- Variables ----*/
+  /*-------------------*/
+  const fileRef = useRef(null);
+  const { fileName, getFileName } = useFilePath();
+
   /*---------------*/
   /*---- Hooks ----*/
   /*---------------*/
   const [formData, onInputHandler] = useOnInput({
     description: "",
-    file: "",
+    filePath: "",
   });
+
+  /*------------------*/
+  /*---- Handlers ----*/
+  /*------------------*/
+  const fileInput = () => {
+    fileRef.current.click();
+  };
+
+  useEffect(() => {
+    getFileName(formData.filePath);
+  }, [formData]);
 
   return (
     <div className={`${styles.addUploadModal} rounded-corner`}>
@@ -31,7 +49,7 @@ function AddUploadModal({ showUploadHandler, uploadHandler }) {
       {/* Form */}
       <form
         className={styles.uploadForm}
-        onSubmit={(e) => uploadHandler(e, formData)}
+        onSubmit={(e) => uploadHandler(e, formData, fileName)}
       >
         {/* Row 1 */}
         <div className={styles.row1}>
@@ -50,21 +68,24 @@ function AddUploadModal({ showUploadHandler, uploadHandler }) {
         <div className={styles.row2}>
           <h4 className={styles.formLabel}>File Upload</h4>
           <div className={styles.chooseFileContainer}>
-            <button type="button" className={styles.chooseFileButton}>
+            <button
+              type="button"
+              className={styles.chooseFileButton}
+              onClick={fileInput}
+            >
               Choose file
             </button>
             <input
               type="file"
-              name="file"
+              name="filePath"
               placeholder="Sample.doc"
               className={styles.chooseFileInput}
               onChange={(e) => onInputHandler(e)}
-              value={formData.file}
+              value={formData.filePath}
+              ref={fileRef}
             />
             <div className={styles.filePreview}>
-              <strong style={{ fontSize: "12px" }}>
-                {/* {formatFilename(this.state.file)} */}
-              </strong>
+              <strong style={{ fontSize: "12px" }}>{fileName}</strong>
             </div>
           </div>
         </div>

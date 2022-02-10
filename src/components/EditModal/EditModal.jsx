@@ -1,15 +1,19 @@
 // Libraries
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./EditModal.module.scss";
 // Hooks
 import useOnInput from "../../custom/useOnInput";
 // Assets
 import close from "../../assets/close-button.svg";
 
-function EditModal({ showEditHandler, editHandler }) {
-  const [formData, onInput, valid] = useOnInput({
+function EditModal({ showEditHandler, editHandler, defaultValue }) {
+  const [formData, onInput, errorMessage, valid] = useOnInput({
     description: "",
   });
+
+  useEffect(() => {
+    onInput({ target: { name: "description", value: defaultValue } });
+  }, [defaultValue]);
 
   return (
     <div className={styles.editModal}>
@@ -28,7 +32,7 @@ function EditModal({ showEditHandler, editHandler }) {
         {/* Form */}
         <form
           className={styles.editForm}
-          onSubmit={(e) => editHandler(e, formData.description)}
+          onSubmit={(e) => editHandler(e, formData.description, valid)}
         >
           {/* Row 1 */}
           <div className={styles.row1}>
@@ -41,6 +45,14 @@ function EditModal({ showEditHandler, editHandler }) {
               value={formData.description}
               onInput={(e) => onInput(e)}
             />
+          </div>
+          <div className={styles.rowError}>
+            <div></div>
+            <div className={styles.errorContainer}>
+              <small className={styles.errorMessage}>
+                {errorMessage.description}
+              </small>
+            </div>
           </div>
           {/* Row 2 */}
           <div className={styles.row2}>

@@ -1,6 +1,6 @@
 // Actions creators
 import { editUser } from "../features/userList/userListSlice";
-import { emailExists } from "../utils/functions";
+import { emailExists } from "../utils/formValidation";
 
 export const editUserAction = (formData, data, userList) => (dispatch) => {
   const newData = {

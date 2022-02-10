@@ -10,7 +10,7 @@ import useOnInput from "../../custom/useOnInput";
 // Actions
 import { registerAction } from "../../actions/registerAction";
 // Functions
-import { emailExists } from "../../utils/functions";
+import { emailExists } from "../../utils/formValidation";
 
 function Register() {
   /*-------------------*/

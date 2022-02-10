@@ -11,7 +11,8 @@
 
   width: 100%;
   max-width: 500px;
-  color: black;
+  color: #18191a;
+  border-color: #18191a !important;
 
   /* Toolbar */
   .toolbar {
@@ -44,18 +45,35 @@
     .row1,
     .row2,
     .row3 {
-      padding: 10px 10px 20px 30px;
+      padding: 10px 10px 0px 30px;
     }
 
     .row1 {
       display: grid;
       grid-template-columns: 30% auto;
       align-items: center;
-
+      position: relative;
       input[type="text"] {
         padding: 6px 8px;
         max-width: 450px;
         width: 100%;
+      }
+    }
+
+    /* Error message */
+    .rowError {
+      display: grid;
+      grid-template-columns: 30% auto;
+      padding: 0px 10px 20px 30px;
+
+      .errorContainer {
+        position: relative;
+        .errorMessage {
+          color: red;
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
       }
     }
 

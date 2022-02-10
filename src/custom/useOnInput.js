@@ -69,6 +69,13 @@ function useOnInput(formInputs) {
               : "",
           }));
           break;
+        case "description":
+          setErrorMessage((prev) => ({
+            ...prev,
+            description: value.length <= 0 ? `This field is required` : "",
+          }));
+          break;
+
         default:
           break;
       }

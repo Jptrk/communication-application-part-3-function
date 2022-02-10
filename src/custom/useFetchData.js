@@ -21,7 +21,21 @@ function useFetchData() {
     }
   }, []);
 
-  return [data, fetchData];
+  // This will return the selected data
+  // instead of setting the data state
+  const returnFetchedData = (id, arrData, property) => {
+    const selectedData = arrData.filter(
+      (data) => data[property] === parseInt(id)
+    )[0];
+
+    if (selectedData) {
+      return selectedData;
+    } else {
+      return false;
+    }
+  };
+
+  return [data, fetchData, returnFetchedData];
 }
 
 export default useFetchData;

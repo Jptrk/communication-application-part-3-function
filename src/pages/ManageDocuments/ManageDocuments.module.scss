@@ -18,6 +18,11 @@
   .sharedUploadContainer {
     margin-bottom: 40px;
 
+    .table-wrapper {
+      max-width: 40vh;
+      overflow-y: auto;
+    }
+
     .addUpload {
       padding: 6px 20px;
       font-size: 12px;

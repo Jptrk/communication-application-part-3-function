@@ -11,7 +11,7 @@ import usePathname from "../../custom/usePathname";
 import useFetchData from "../../custom/useFetchData";
 import { useSelector } from "react-redux";
 // Actions
-import { editUserAction } from "../../actions/edutUserAction";
+import { editUserAction } from "../../actions/editUserAction";
 
 function EditUser() {
   /*-------------------*/

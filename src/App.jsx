@@ -15,6 +15,7 @@ import EditUser from "./pages/ManageUsers/EditUser";
 import ManageDocuments from "./pages/ManageDocuments/ManageDocuments";
 import Share from "./pages/Share/Share";
 import LoginSuccessful from "./pages/LoginSuccessful/LoginSuccessful";
+import PageNotFound from "./components/PageNotFound/PageNotFound";
 // Actions
 import { fetchUserList } from "./features/userList/userListSlice";
 import { fetchUploadList } from "./features/uploadList/uploadListSlice";
@@ -98,6 +99,9 @@ function App() {
           {/* Login successful */}
           <Route path="loginsuccessful" element={<LoginSuccessful />} />
         </Route>
+
+        {/* Page Not Found */}
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       {/* Theme toggle */}
       <DarkMode />
